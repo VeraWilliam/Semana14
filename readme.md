@@ -1,2 +1,2 @@
-# Investigacion 2
+## Investigacion 2
 William Vera
