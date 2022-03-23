@@ -1,2 +1,1 @@
-## Investigacion 2
-William Vera
+Investigacion 2
