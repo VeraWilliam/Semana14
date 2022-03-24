@@ -1,2 +1,2 @@
 ## Investigacion 2
-Vera William
+Vera Herrera William
