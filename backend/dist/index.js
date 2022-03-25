@@ -34,18 +34,18 @@ app.get("/cargo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 // ruta al servidor para los departamentos
 app.get("/departamento", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // genero una conexion
-    const conn1 = yield (0, database_1.connect)();
+    const conn = yield (0, database_1.connect)();
     // traigo los departamentos de la base de datos
-    const departamentos = yield conn1.query("SELECT * FROM DEPARTAMENTO");
+    const departamentos = yield conn.query("SELECT * FROM DEPARTAMENTO");
     // en la posicion 0 me trae los datos en forma de arreglo
     res.json(departamentos[0]);
 }));
 // ruta al servidor para los empleados
 app.get("/empleado", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // genero una conexion
-    const conn2 = yield (0, database_1.connect)();
+    const conn = yield (0, database_1.connect)();
     // traigo los empleados de la base de datos
-    const empleados = yield conn2.query("SELECT * FROM EMPLEADO");
+    const empleados = yield conn.query("SELECT e.id, e.nombre, e.sueldo,c.descripcion AS cargo FROM empleado e INNER JOIN cargo c ON e.cargoID = c.id");
     // en la posicion 0 me trae los datos en forma de arreglo
     res.json(empleados[0]);
 }));

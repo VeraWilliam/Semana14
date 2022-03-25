@@ -20,18 +20,18 @@ app.get("/cargo", async (req: Request, res: Response) => {
 // ruta al servidor para los departamentos
 app.get("/departamento", async (req: Request, res: Response) => {
     // genero una conexion
-    const conn1 = await connect()
+    const conn = await connect()
     // traigo los departamentos de la base de datos
-    const departamentos = await conn1.query("SELECT * FROM DEPARTAMENTO");
+    const departamentos = await conn.query("SELECT * FROM DEPARTAMENTO");
     // en la posicion 0 me trae los datos en forma de arreglo
     res.json(departamentos[0])
 })
 // ruta al servidor para los empleados
 app.get("/empleado", async (req: Request, res: Response) => {
     // genero una conexion
-    const conn2 = await connect()
+    const conn = await connect()
     // traigo los empleados de la base de datos
-    const empleados = await conn2.query("SELECT * FROM EMPLEADO");
+    const empleados = await conn.query("SELECT e.id, e.nombre, e.sueldo,c.descripcion AS cargo FROM empleado e INNER JOIN cargo c ON e.cargoID = c.id");
     // en la posicion 0 me trae los datos en forma de arreglo
     res.json(empleados[0])
 })
