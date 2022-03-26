@@ -6,14 +6,14 @@ import { connect } from "./database";
 const app = express()
 // rutas del servidor
 app.get("/", (req: Request, res: Response) => {
-    res.send("Bienvenido al sitio web")
+    res.send("Bienvenido a  mi Pagina Principal")
 })
 // ruta al servidor para los cargos
 app.get("/cargo", async (req: Request, res: Response) => {
     // genero una conexion
     const conn = await connect()
     // traigo los cargos de la base de datos
-    const cargos = await conn.query("SELECT * FROM CARGO");
+    const cargos = await conn.query("SELECT * FROM cargo");
     // en la posicion 0 me trae los datos en forma de arreglo
     res.json(cargos[0])
 })

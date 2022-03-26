@@ -20,14 +20,14 @@ const database_1 = require("./database");
 const app = (0, express_1.default)();
 // rutas del servidor
 app.get("/", (req, res) => {
-    res.send("Bienvenido al sitio web");
+    res.send("Bienvenido a  mi Pagina Principal");
 });
 // ruta al servidor para los cargos
 app.get("/cargo", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // genero una conexion
     const conn = yield (0, database_1.connect)();
     // traigo los cargos de la base de datos
-    const cargos = yield conn.query("SELECT * FROM CARGO");
+    const cargos = yield conn.query("SELECT * FROM cargo");
     // en la posicion 0 me trae los datos en forma de arreglo
     res.json(cargos[0]);
 }));

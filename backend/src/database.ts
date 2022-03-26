@@ -1,5 +1,5 @@
 // importar el conector
-import { createPool, Pool } from "mysql2/promise"
+import { createPool, Pool } from "mysql2/promise";
 // creamos la funcion asincrona para conectarnos a la base de datos
 export async function connect() {
     // definimos un objeto de tipo conexion
