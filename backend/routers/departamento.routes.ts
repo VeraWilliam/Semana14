@@ -1,10 +1,10 @@
 // importar ruter
 import { Router } from "express";
 import { getDepartamentos } from "../controllers/departamento.controllers";
-import { connect } from "../src/database";
+// import { Coneccion } from "../src/database";
 // instaciar router - ruteador
-const router2 = Router();
+const routerDepartamento = Router();
 // crear rutas de cargos
-router2.route("/").get(getDepartamentos);
+routerDepartamento.route("/").get(getDepartamentos);
 
-export default router2
+export default routerDepartamento

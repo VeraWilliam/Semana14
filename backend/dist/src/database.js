@@ -9,23 +9,55 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connect = void 0;
+exports.Coneccion = void 0;
 // importar el conector
 const promise_1 = require("mysql2/promise");
-// creamos la funcion asincrona para conectarnos a la base de datos
-function connect() {
-    return __awaiter(this, void 0, void 0, function* () {
-        // definimos un objeto de tipo conexion
-        const connection = yield (0, promise_1.createPool)({
-            // enviamos los parametros de conexon hacia la base de datos
-            host: "localhost",
-            user: "root",
-            password: "root",
-            database: "nomina",
-            connectionLimit: 10,
-        });
-        // retorno la conexion
-        return connection;
-    });
+// // creamos la funcion asincrona para conectarnos a la base de datos
+// export async function connect() {
+//     // definimos un objeto de tipo conexion
+//     const connection = await createPool({
+//         // enviamos los parametros de conexon hacia la base de datos
+//         host: "localhost",
+//         user: "root",
+//         password: "root",
+//         database: "nomina",
+//         connectionLimit: 10,
+//     });
+//     // retorno la conexion
+//     return connection;
+// }
+// clase abstracta (clase base que se hereda pero no se puede instanciar)
+class Conexion {
+    constructor() {
+        this.conn = null;
+    }
+    get _conn() {
+        return this.conn;
+    }
+    set _conn(value) {
+        this.conn = value;
+    }
 }
-exports.connect = connect;
+class Coneccion extends Conexion {
+    constructor() {
+        super(); // ejecuta el constructor de la clase heredada
+    }
+    connect() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const connection = yield (0, promise_1.createPool)({
+                host: "localhost",
+                user: "root",
+                password: "root",
+                database: "nomina",
+                connectionLimit: 10,
+            });
+            return connection;
+        });
+    }
+    getConneccion() {
+        return __awaiter(this, void 0, void 0, function* () {
+            return yield this.connect();
+        });
+    }
+}
+exports.Coneccion = Coneccion;

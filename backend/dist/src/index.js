@@ -1,28 +1,17 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// importamos express
-const express_1 = __importDefault(require("express"));
-const morgan_1 = __importDefault(require("morgan"));
-const cargo_routes_1 = __importDefault(require("../routers/cargo.routes"));
-const departamento_routes_1 = __importDefault(require("../routers/departamento.routes"));
-const empleados_routes_1 = __importDefault(require("../routers/empleados.routes"));
-// creamos el servidor local
-const app = (0, express_1.default)();
-// morgan en Middleware de nivel de solicitud
-app.use((0, morgan_1.default)("dev"));
-// middleware: funciones que se ejecutan como un hilo
-app.use(express_1.default.json());
-// rutas del servidor
-app.get("/", (req, res) => {
-    res.send("Bienvenidos a mi app");
+const servidor_1 = require("../src/servidor");
+const main = () => __awaiter(void 0, void 0, void 0, function* () {
+    const app = new servidor_1.App();
+    yield app.listen();
 });
-app.use("/cargos", cargo_routes_1.default);
-app.use("/departamentos", departamento_routes_1.default);
-app.use("/empleados", empleados_routes_1.default);
-// ejecuto mi servidor
-app.listen(3000, () => {
-    console.log("Ejecutando en el servidor en el puerto 3000");
-});
+main();
