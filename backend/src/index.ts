@@ -1,40 +1,23 @@
 // importamos express
-import express, { Request, Response } from "express";
-// importamos el archivo database
-import { connect } from "./database";
+import express, { Application, Request, Response } from "express"
+import { connect } from "./database"
+import morgan from "morgan"
+import router1 from "../routers/cargo.routes";
+import router2 from "../routers/departamento.routes";
+import router3 from "../routers/empleados.routes";
 // creamos el servidor local
-const app = express()
+const app: Application = express();
+// morgan en Middleware de nivel de solicitud
+app.use(morgan("dev"))
+// middleware: funciones que se ejecutan como un hilo
+app.use(express.json());
 // rutas del servidor
-app.get("/", (req: Request, res: Response) => {
-    res.send("Bienvenido a  mi Pagina Principal")
-})
-// ruta al servidor para los cargos
-app.get("/cargo", async (req: Request, res: Response) => {
-    // genero una conexion
-    const conn = await connect()
-    // traigo los cargos de la base de datos
-    const cargos = await conn.query("SELECT * FROM cargo");
-    // en la posicion 0 me trae los datos en forma de arreglo
-    res.json(cargos[0])
-})
-// ruta al servidor para los departamentos
-app.get("/departamento", async (req: Request, res: Response) => {
-    // genero una conexion
-    const conn = await connect()
-    // traigo los departamentos de la base de datos
-    const departamentos = await conn.query("SELECT * FROM DEPARTAMENTO");
-    // en la posicion 0 me trae los datos en forma de arreglo
-    res.json(departamentos[0])
-})
-// ruta al servidor para los empleados
-app.get("/empleado", async (req: Request, res: Response) => {
-    // genero una conexion
-    const conn = await connect()
-    // traigo los empleados de la base de datos
-    const empleados = await conn.query("SELECT e.id, e.nombre, e.sueldo,c.descripcion AS cargo FROM empleado e INNER JOIN cargo c ON e.cargoID = c.id");
-    // en la posicion 0 me trae los datos en forma de arreglo
-    res.json(empleados[0])
-})
+app.get("/", (req, res) => {
+    res.send("Bienvenidos a mi app")
+});
+app.use("/cargos", router1);
+app.use("/departamentos", router2);
+app.use("/empleados", router3);
 // ejecuto mi servidor
 app.listen(3000, () => {
     console.log("Ejecutando en el servidor en el puerto 3000")
