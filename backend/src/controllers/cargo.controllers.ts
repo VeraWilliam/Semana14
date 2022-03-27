@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { Coneccion } from "../src/database";
+import { Coneccion } from "../bd/database";
 
 const conection: Coneccion = new Coneccion();
 
