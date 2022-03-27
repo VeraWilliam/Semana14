@@ -1,1 +1,0 @@
-console.log("Respondiendo desde el servidor javascript");

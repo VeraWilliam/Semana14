@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDepartamentos = void 0;
-const database_1 = require("../src/database");
+const database_1 = require("../bd/database");
 const conection = new database_1.Coneccion();
 // controlador de getcargos( funcion logica de peticion)
 function getDepartamentos(req, res) {

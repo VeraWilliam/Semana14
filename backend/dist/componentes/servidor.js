@@ -18,6 +18,7 @@ const morgan_1 = __importDefault(require("morgan"));
 const cargo_routes_1 = __importDefault(require("../routers/cargo.routes"));
 const departamento_routes_1 = __importDefault(require("../routers/departamento.routes"));
 const empleados_routes_1 = __importDefault(require("../routers/empleados.routes"));
+const principal_1 = __importDefault(require("../routers/principal"));
 class App {
     constructor(port = 3000) {
         this.port = port;
@@ -39,12 +40,10 @@ class App {
         // this.app.use(cors());
     }
     routes() {
-        this.app.get("/", (req, res) => {
-            res.send("Bienvenidos a mi App");
-        });
+        this.app.use(principal_1.default);
         this.app.use("/cargos", cargo_routes_1.default);
-        this.app.use("/departamento", departamento_routes_1.default);
-        this.app.use("/empleado", empleados_routes_1.default);
+        this.app.use("/departamentos", departamento_routes_1.default);
+        this.app.use("/empleados", empleados_routes_1.default);
     }
     listen() {
         return __awaiter(this, void 0, void 0, function* () {

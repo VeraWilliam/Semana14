@@ -4,6 +4,8 @@ import morgan from "morgan"
 import routerCargo from "../routers/cargo.routes";
 import routerDepartamento from "../routers/departamento.routes";
 import routerEmpleado from "../routers/empleados.routes";
+import routerPrincipal from "../routers/principal";
+
 
 export class App implements IApp {
     public app: Application;
@@ -30,12 +32,10 @@ export class App implements IApp {
     }
 
     routes() {
-        this.app.get("/", (req, res) => {
-            res.send("Bienvenidos a mi App")
-        });
-        this.app.use("/cargo", routerCargo);
-        this.app.use("/departamento", routerDepartamento);
-        this.app.use("/empleado", routerEmpleado);
+        this.app.use(routerPrincipal)
+        this.app.use("/cargos", routerCargo);
+        this.app.use("/departamentos", routerDepartamento);
+        this.app.use("/empleados", routerEmpleado);
     }
     async listen(): Promise<void> {
         await this.app.listen(this.app.get("port"));
