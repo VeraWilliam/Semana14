@@ -1,7 +1,7 @@
-export class Cargo {
+export class Departamento {
   // se ejecuta al instanciar la clea y crea los atributos con this
   constructor() {
-    this.cargos = [{
+    this.departamentos = [{
         id: 1,
         descripcion: "Analista",
         estado: 1
@@ -20,22 +20,22 @@ export class Cargo {
 
     this.id = "";
     this.grabar = true;
-    this.url = "http://localhost:3000/cargos";
+    this.url = "http://localhost:3000/departamentos";
   }
 
-  obtenerCargos() {
+  obtenerDepartamentos() {
     // console.log(this.cargos);
     fetch(this.url)
       .then((res) => res.json())
-      .then((cargos) => {
+      .then((departamentos) => {
         // console.log(cargos);
         let filas = ""
-        cargos.forEach((cargo) => {
+        departamentos.forEach((departamento) => {
           let {
             id,
             descripcion,
             estado
-          } = cargo;
+          } = departamento;
           // console.log(cargo.descripcion);
           filas += `
       <tr>
@@ -49,14 +49,14 @@ export class Cargo {
       </tr>`;
         })
         //console.log(filas);
-        document.getElementById("detalle-cargos").innerHTML = filas;
+        document.getElementById("detalle-departamentos").innerHTML = filas;
         // eliminar
         const btnsDelete = document.querySelectorAll(".btn-delete");
         btnsDelete.forEach((btn) => {
           btn.addEventListener("click", async (e) => {
             console.log(btn.dataset.id, e.target.dataset.id);
             console.log("elimnando...");
-            await this.eliminarCargo(e.target.dataset.id);
+            await this.eliminarDepartamento(e.target.dataset.id);
           });
         });
         // editar
@@ -68,7 +68,7 @@ export class Cargo {
             let {
               descripcion,
               estado
-            } = await this.obtenerCargo(this.id);
+            } = await this.obtenerDepartamento(this.id);
             document.getElementById("descripcion").value = descripcion;
             document.getElementById("activo").checked = estado;
             document.getElementById("enviar").innerHTML = "Actualizar";
@@ -81,37 +81,37 @@ export class Cargo {
 
   }
 
-  async obtenerCargo(id) {
+  async obtenerDepartamento(id) {
     const res = await fetch(`${this.url}/${id}`);
     const dato = await res.json()
     console.log(dato);
     return dato;
   }
 
-  async eliminarCargo(id) {
+  async eliminarDepartamento(id) {
     const res = await fetch(`${this.url}/${id}`, {
       method: "delete"
     });
-    this.obtenerCargos();
+    this.obtenerDepartamentos();
   }
 
-  async insertarDatos(cargo) {
+  async insertarDatos(departamento) {
     const res = await fetch(this.url, {
       method: "post",
-      body: cargo
+      body: departamento
     });
     console.log(res);
-    this.obtenerCargos()
+    this.obtenerDepartamentos()
     return true
   }
 
-  async modificarDatos(cargoMod, id) {
+  async modificarDatos(departamentoMod, id) {
     try {
       const res = await fetch(`${this.url}/${id}`, {
         method: "put",
-        body: cargoMod
+        body: departamentoMod
       });
-      this.obtenerCargos();
+      this.obtenerDepartamentos();
       document.getElementById("enviar").innerHTML = "Insertar";
       this.grabar = true;
     } catch (error) {

@@ -19,6 +19,7 @@ const cargo_routes_1 = __importDefault(require("../routers/cargo.routes"));
 const departamento_routes_1 = __importDefault(require("../routers/departamento.routes"));
 const empleados_routes_1 = __importDefault(require("../routers/empleados.routes"));
 const principal_1 = __importDefault(require("../routers/principal"));
+const cors_1 = __importDefault(require("cors"));
 class App {
     constructor(port = 3000) {
         this.port = port;
@@ -37,7 +38,7 @@ class App {
         this.app.use(express_1.default.urlencoded({ extended: true }));
         // recibe datos como json(no de formularios)
         this.app.use(express_1.default.json({ type: "*/*" }));
-        this.app.use(cors());
+        this.app.use((0, cors_1.default)());
     }
     routes() {
         this.app.use(principal_1.default);

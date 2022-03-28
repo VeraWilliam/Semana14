@@ -15,7 +15,4 @@ router.route("/:cargoId")
     .delete(deleteCargo)
     .put(updateCargo)
 
-
-
-
 export default router
