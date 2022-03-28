@@ -5,7 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/main.css">
-    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/header.css">    
+    <link rel="stylesheet" href="../css/formulario.css">
+    <script defer src="../js/empleado/empleado.js" type="module" ></script>
     <title>Empleado</title>
 </head>
 <body>
@@ -27,9 +29,102 @@
   </header>
 
   <main>
-    <section>
-      <h1>Empleados</h1>
+    <section class="form-container">
+      <div class="form-header">
+        <h2>Formulario de Empleado</h2>
+      </div>
+      <form id="form-empleado" class="form">
+        <div class="form-group">
+          <label for="nombre">Nombre</label>
+          <input
+            type="text"
+            name="descripcion"
+            id="nombre"
+            placeholder="Nombre del Empleado"
+            title="El cargo solo acepta letras y espacios en blanco"
+            pattern="^[A-Za-zÑñáéíóú\s]+$"
+            required
+            value=""
+          />
+          <label for="nombre">Cargo</label>
+          <input
+            type="number"
+            name="descripcion"
+            id="cargoID"
+            placeholder="Cargo del Empleado"
+            title="El cargo solo acepta numeros"
+            pattern="^[A-Za-zÑñáéíóú\s]+$"
+            required
+            value=""
+          />
+          <label for="nombre">Departamento</label>
+          <input
+            type="number"
+            name="descripcion"
+            id="departamentoID"
+            placeholder="Departamento del Empleado"
+            title="El cargo solo acepta numeros"
+            pattern="^[A-Za-zÑñáéíóú\s]+$"
+            required
+            value=""
+          />
+          <label for="nombre">Sueldo</label>
+          <input
+            type="number"
+            name="descripcion"
+            id="sueldo"
+            placeholder="Sueldo del Empleado"
+            title="El cargo solo acepta numeros"
+          />
+        </div>
+        <div class="form-check">
+          <label
+            >Activo
+            <input type="checkbox" id="activo" value="activo" checked />
+          </label>
+        </div>
+        <button
+          id="enviar"
+          type="submit"
+          name="enviar"
+        >
+          Insertar
+        </button>
+       
+      </form>
+       <div class="consulta none table-responsive" id="consulta">
+            <h3>Listado de Empleado</h3>
+          <table class="consulta-est" id="consulta-est" border="1">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Departamento</th>
+                <th>Sueldo</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>  
+            </thead>
+            <tbody class="detalle-est" id="detalle-empleados">
+              <!-- <tr>
+                <td>1</td>
+                <td>Isidro Vera</td>
+                <td>Sistemas</td>
+                <td>Jefe de Sistemas</td>
+                <td>Activo</td>
+                <td>
+                  <button>✏️</button>
+                  <button>❌</button>
+                </td>
+              </tr> -->
+          
+            </tbody>
+          </table>
+       </div>    
     </section>
   </main>
+
+
 </body>
 </html>
