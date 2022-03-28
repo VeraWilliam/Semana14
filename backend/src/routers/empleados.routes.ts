@@ -1,11 +1,17 @@
 // importar ruter
 import { Router } from "express";
-import { getEmpleados } from "../controllers/empleado.controllers";
-import { Coneccion } from "../bd/database";
+import { createEmpleado, deleteEmpleado, getEmpleado, getEmpleados, updateEmpleado } from "../controllers/empleado.controllers";
 // instaciar router - ruteador
-const routerEmpleado = Router();
+const router = Router();
 // crear rutas de cargos
-routerEmpleado.route("/").get(getEmpleados);
+router.route("/")
+    .get(getEmpleados)
+    .post(createEmpleado)
 
+router.route("/:empleadoId")
+    .get(getEmpleado)
+    .delete(deleteEmpleado)
+    .put(updateEmpleado)
 
-export default routerEmpleado
+export default router
+

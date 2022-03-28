@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getEmpleados = void 0;
+exports.updateEmpleado = exports.deleteEmpleado = exports.getEmpleado = exports.createEmpleado = exports.getEmpleados = void 0;
 const database_1 = require("../bd/database");
 const conection = new database_1.Coneccion();
 // controlador de getcargos( funcion logica de peticion)
@@ -27,3 +27,53 @@ function getEmpleados(req, res) {
 }
 exports.getEmpleados = getEmpleados;
 ;
+function createEmpleado(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const modEmpleado = req.body;
+            console.log(modEmpleado);
+            const conn = yield conection.getConneccion();
+            const empleados = yield conn.query("INSERT INTO empleado SET ?", [modEmpleado]);
+            res.json({ msg: "Empleado insertado Satisfactoriamente", cargo: modEmpleado });
+        }
+        catch (err) {
+            console.log(err);
+        }
+    });
+}
+exports.createEmpleado = createEmpleado;
+function getEmpleado(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const id = req.params.empleadoId;
+        const conn = yield conection.getConneccion();
+        const empleado = yield conn.query("SELECT * FROM empleado WHERE id = ?", [id]);
+        res.json(empleado[0]);
+    });
+}
+exports.getEmpleado = getEmpleado;
+function deleteEmpleado(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const id = req.params.empleadoId;
+        console.log(req.params);
+        const conn = yield conection.getConneccion();
+        yield conn.query("DELETE FROM empleado WHERE id = ?", [id]);
+        res.json({
+            message: "empleado eliminado",
+            id,
+        });
+    });
+}
+exports.deleteEmpleado = deleteEmpleado;
+function updateEmpleado(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const id = req.params.empleadoId;
+        const modEmpleado = req.body;
+        const conn = yield conection.getConneccion();
+        yield conn.query("UPDATE empleado set ? WHERE id = ?", [modEmpleado, id]);
+        res.json({
+            message: "Empleado actualizado",
+            modEmpleado,
+        });
+    });
+}
+exports.updateEmpleado = updateEmpleado;
