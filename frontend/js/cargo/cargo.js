@@ -5,16 +5,23 @@ import {
 const serCargo = new Cargo();
 const d = document;
 const $formCargo = d.getElementById("form-cargo");
-d.addEventListener("DOMContentLoaded", serCargo.obtenerCargos())
 // registrar evento
+d.addEventListener("DOMContentLoaded", serCargo.obtenerCargos());
+// delegacion de eventos
+d.addEventListener("click", (e) => {
+  alert("haz hecho click")
+  console.log(e.target)
+});
+
+
 
 // import { Cargo } from "./componente.js";
 // // instanciamos cargo
 // const serCargo = new Cargo();
 // const d = document;
 // const $formCargo = d.getElementById("form-cargo");
-
 // d.addEventListener("DOMContentLoaded", serCargo.obtenerCargos());
+
 // // delegacion de eventos
 // d.addEventListener("click", async (e) => {
 //   console.log(e.target);

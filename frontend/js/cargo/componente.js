@@ -28,48 +28,69 @@ export class Cargo {
     fetch(this.url)
       .then((res) => res.json())
       .then((cargos) => {
-        console.log(cargos);
+        // console.log(cargos);
+        let filas = ""
+        cargos.forEach((cargo) => {
+          let {
+            id,
+            descripcion,
+            estado
+          } = cargo;
+          // console.log(cargo.descripcion);
+          filas += `
+      <tr>
+        <td>${id}</td>
+        <td>${descripcion}</td>
+        <td>${estado ? "Activo" : "Inactivo"}</td>
+        <td>
+          <button type="button" class="btn btn-edit" id="btn-edit" data-id="${id}">✏️</button>
+          <button type="button" class="btn btn-delete" id="btn-delete" data-id="${id}">❌</button>
+        </td>
+      </tr>`;
+        })
+        document.getElementById("detalle-cargos").innerHTML = filas;
       })
       .catch((err) => console.log("error:=>", err))
 
-    let filas = ""
-    this.cargos.forEach((cargo) => {
-      let {
-        id,
-        descripcion,
-        estado
-      } = cargo;
-      // console.log(cargo.descripcion);
-      filas += `
-      <tr>
-          <td>${id}</td>
-          <td>${descripcion}</td>
-          <td>${estado ? "Activo" : "Inactivo"}</td>
-          <td>
-            <button type="button" class="btn btn-edit" id="btn-edit" data-id="${id}">✏️</button>
-            <button type="button" class="btn btn-delete" id="btn-delete" data-id="${id}">❌</button>
-          </td>
-        </tr>
-         `;
-    })
-    // console.log(filas);
-    document.getElementById("detalle-cargos").innerHTML = filas;
+
   }
 
-  obtenerCargo(id) {
-    console.log(id);
+  async obtenerCargo(id) {
+    const res = await fetch(`${this.url}/${id}`);
+    const dato = await res.json()
+    console.log(dato);
+    return dato;
   }
 
-  eliminarCargo(id) {
-    console.log(id);
+  async eliminarCargo(id) {
+    const res = await fetch(`${this.url}/${id}`, {
+      method: "delete"
+    });
+    this.obtenerCargos();
   }
 
-  insertarDatos(cargo) {
-    console.log(cargo);
+  async insertarDatos(cargo) {
+    const res = await fetch(this.url, {
+      method: "post",
+      body: cargo
+    });
+    console.log(res);
+    this.obtenerCargos()
+    return true
   }
 
-  modificarDatos(cargoMod, id) {
-    console.log(cargoMod, id)
+  async modificarDatos(cargoMod, id) {
+    try {
+      const res = await fetch(`${this.url}/${id}`, {
+        method: "put",
+        body: cargoMod
+      });
+      this.obtenerCargos();
+      document.getElementById("enviar").innerHTML = "Insertar";
+      this.grabar = true;
+    } catch (error) {
+      console.log("error: ", error);
+    }
   }
 
   // export class Cargo {
@@ -89,7 +110,7 @@ export class Cargo {
   //        cargos.forEach((cargo) => {
   //          // destructuring: descomponer un objeto en sus atributos
   //          let { id, descripcion, estado } = cargo;
-  //          filas += ` <tr>
+  //          filas += ` < tr >
   //         <td>${id}</td>
   //         <td>${descripcion}</td>
   //         <td>${estado ? "Activo" : "Inactivo"}</td>
@@ -97,7 +118,7 @@ export class Cargo {
   // <button type="button" class="btn btn-edit" id="btn-edit" data-id="${id}">✏️</button>
   // <button type="button" class="btn btn-delete" id="btn-delete" data-id="${id}">❌</button>
   //         </td>
-  //       </tr>
+  //       </>
   //        `;
   //        });
   //        //console.log(filas);
