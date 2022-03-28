@@ -19,6 +19,7 @@ d.addEventListener("click", async (e) => {
       alert("Datos vacios o incompletos");
     } else {
       if (serCargo.grabar) {
+        // let id = Date.now();
         const cargo = {
           descripcion: $descrip,
           estado: $estado
