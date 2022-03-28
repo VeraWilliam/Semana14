@@ -5,11 +5,11 @@ import {
 const serDepartamento = new Departamento();
 const d = document;
 const $formDepartamento = d.getElementById("form-departamento");
-// registrar evento
-d.addEventListener("DOMContentLoaded", serDepartamento.obtenerDepartamentos());
-// delegacion de eventos
+
+d.addEventListener("DOMContentLoaded", serDepartamento.obtenerDepartamentos())
+
 d.addEventListener("click", async (e) => {
-  // alert("haz hecho click")
+
   console.log(e.target)
   if (e.target.matches("#enviar")) {
     e.preventDefault();
@@ -18,8 +18,8 @@ d.addEventListener("click", async (e) => {
     if ($descrip.trim().length < 3) {
       alert("Datos vacios o incompletos");
     } else {
+
       if (serDepartamento.grabar) {
-        // let id = Date.now();
         const departamento = {
           descripcion: $descrip,
           estado: $estado
@@ -38,4 +38,4 @@ d.addEventListener("click", async (e) => {
       $formDepartamento.reset();
     }
   }
-});
+})

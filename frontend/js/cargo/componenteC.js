@@ -85,7 +85,7 @@ export class Cargo {
         const res = await fetch(`${this.url}/${id}`);
         const dato = await res.json()
         console.log(dato);
-        return dato;
+        return dato[0];
     }
 
     async eliminarCargo(id) {

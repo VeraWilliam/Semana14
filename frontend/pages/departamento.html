@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/main.css">
     <link rel="stylesheet" href="../css/header.css">
      <link rel="stylesheet" href="../css/formulario.css">
-     <!-- <script defer src="../js" type="module" ></script> -->
+     <script defer src="../js/departamento/departamento.js" type="module" ></script>
     <title>Departamentos</title>
 </head>
 <body>
@@ -33,7 +33,7 @@
       <div class="form-header">
         <h2>Formulario de Departamentos</h2>
       </div>
-      <form id="form-cargo" class="form">
+      <form id="form-departamento" class="form">
         <div class="form-group">
           <label for="nombre">Descripcion</label>
           <input
@@ -41,7 +41,7 @@
             name="descripcion"
             id="descripcion"
             placeholder="Descripcion del departamento"
-            title="El cargo solo acepta letras y espacios en blanco"
+            title="El departamento solo acepta letras y espacios en blanco"
             pattern="^[A-Za-zÑñáéíóú\s]+$"
             required
             value=""
@@ -73,7 +73,7 @@
                 <th>Acciones</th>
               </tr>  
             </thead>
-            <tbody class="detalle-est" id="detalle-cargos">
+            <tbody class="detalle-est" id="detalle-departamentos">
               <!-- <tr>
                 <td>1</td>
                 <td>Analista</td>

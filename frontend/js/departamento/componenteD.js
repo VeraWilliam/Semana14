@@ -1,34 +1,17 @@
 export class Departamento {
   // se ejecuta al instanciar la clea y crea los atributos con this
   constructor() {
-    this.departamentos = [{
-        id: 1,
-        descripcion: "Analista",
-        estado: 1
-      },
-      {
-        id: 2,
-        descripcion: "Ingeniero",
-        estado: 0
-      },
-      {
-        id: 3,
-        descripcion: "Consultor",
-        estado: 1
-      },
-    ];
-
     this.id = "";
     this.grabar = true;
     this.url = "http://localhost:3000/departamentos";
   }
 
   obtenerDepartamentos() {
-    // console.log(this.cargos);
+    // console.log(this.departamentos);
     fetch(this.url)
       .then((res) => res.json())
       .then((departamentos) => {
-        // console.log(cargos);
+        console.log(departamentos);
         let filas = ""
         departamentos.forEach((departamento) => {
           let {
@@ -36,19 +19,18 @@ export class Departamento {
             descripcion,
             estado
           } = departamento;
-          // console.log(cargo.descripcion);
+          // console.log(departamento.descripcion)
           filas += `
-      <tr>
-        <td>${id}</td>
-        <td>${descripcion}</td>
-        <td>${estado ? "Activo" : "Inactivo"}</td>
-        <td>
-          <button type="button" class="btn btn-edit" id="btn-edit" data-id="${id}">✎</button>
-          <button type="button" class="btn btn-delete" id="btn-delete" data-id="${id}">❌</button>
-        </td>
-      </tr>`;
+          <tr>
+            <td>${id}</td>
+            <td>${descripcion}</td>
+            <td>${estado ? "Activo" : "Inactivo"}</td>
+            <td>
+              <button type="button" class="btn btn-edit" id="btn-edit" data-id="${id}">✎</button>
+              <button type="button" class="btn btn-delete" id="btn-delete" data-id="${id}">❌</button>
+            </td>
+          </tr>`;
         })
-        //console.log(filas);
         document.getElementById("detalle-departamentos").innerHTML = filas;
         // eliminar
         const btnsDelete = document.querySelectorAll(".btn-delete");
@@ -76,8 +58,7 @@ export class Departamento {
           });
         });
       })
-      .catch((err) => console.log("error:=>", err))
-
+      .catch((err) => console.log("error:=>", err));
 
   }
 
@@ -85,8 +66,8 @@ export class Departamento {
     const res = await fetch(`${this.url}/${id}`);
     const dato = await res.json()
     console.log(dato);
-    return dato;
-  }
+    return dato[0];
+  };
 
   async eliminarDepartamento(id) {
     const res = await fetch(`${this.url}/${id}`, {
