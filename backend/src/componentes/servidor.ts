@@ -5,6 +5,7 @@ import routerCargo from "../routers/cargo.routes";
 import routerDepartamento from "../routers/departamento.routes";
 import routerEmpleado from "../routers/empleados.routes";
 import routerPrincipal from "../routers/principal";
+import cors from 'cors'
 
 
 export class App implements IApp {
@@ -28,7 +29,7 @@ export class App implements IApp {
         this.app.use(express.urlencoded({ extended: true }));
         // recibe datos como json(no de formularios)
         this.app.use(express.json({ type: "*/*" }));
-        // this.app.use(cors());
+        this.app.use(cors());
     }
 
     routes() {

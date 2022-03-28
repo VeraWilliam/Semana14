@@ -37,7 +37,7 @@ class App {
         this.app.use(express_1.default.urlencoded({ extended: true }));
         // recibe datos como json(no de formularios)
         this.app.use(express_1.default.json({ type: "*/*" }));
-        // this.app.use(cors());
+        this.app.use(cors());
     }
     routes() {
         this.app.use(principal_1.default);
